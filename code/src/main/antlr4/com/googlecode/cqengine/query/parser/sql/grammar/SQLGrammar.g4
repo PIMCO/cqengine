@@ -71,9 +71,9 @@ queryParameterLeadingPercent : STRING_LITERAL_WITH_LEADING_PERCENT ;
 queryParameterLeadingAndTrailingPercent : STRING_LITERAL_WITH_LEADING_AND_TRAILING_PERCENT ;
 queryParameter : NUMERIC_LITERAL | STRING_LITERAL | STRING_LITERAL_WITH_TRAILING_PERCENT | STRING_LITERAL_WITH_LEADING_PERCENT | STRING_LITERAL_WITH_LEADING_AND_TRAILING_PERCENT | BOOLEAN_LITERAL ;
 
-STRING_LITERAL_WITH_TRAILING_PERCENT : '\'' ( ~[%'] | '\'\'' )* '%\'' ;
-STRING_LITERAL_WITH_LEADING_PERCENT : '\'%' ( ~[%'] | '\'\'' )* '\'' ;
-STRING_LITERAL_WITH_LEADING_AND_TRAILING_PERCENT : '\'%' ( ~[%'] | '\'\'' )* '%\'' ;
+STRING_LITERAL_WITH_TRAILING_PERCENT : '\'' ( ~['] | '\'\'' )* '%\'' ;
+STRING_LITERAL_WITH_LEADING_PERCENT : '\'%' ( ~['] | '\'\'' )* '\'' ;
+STRING_LITERAL_WITH_LEADING_AND_TRAILING_PERCENT : '\'%' ( ~['] | '\'\'' )* '%\'' ;
 BOOLEAN_LITERAL : 'true' | 'false' ;
 
 attributeOrder : attributeName direction? ;
