@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.googlecode.cqengine</groupId>
     <artifactId>cqengine</artifactId>
-    <version>3.0.2p</version>
+    <version>3.0.3p-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>CQEngine</name>
     <description>Collection Query Engine: NoSQL indexing and query engine for Java collections with ultra-low latency</description>
@@ -241,6 +241,13 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                  <dependency>
+                      <groupId>org.antlr</groupId>
+                      <artifactId>antlr4-runtime</artifactId>
+                      <version>4.7.2</version>
+                  </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
@@ -280,7 +287,7 @@
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
-            <version>4.7.1</version>
+            <version>4.7.2</version>
         </dependency>
         <dependency>
             <groupId>net.jodah</groupId>
