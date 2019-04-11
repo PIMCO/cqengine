@@ -1,3 +1,4 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.googlecode.cqengine</groupId>
@@ -17,17 +18,12 @@
   <distributionManagement>
     <repository>
       <id>pimco-release</id>
-      <url>http://prodart:1977/artifactory/libs-release-local</url>
+      <url>${release.url}</url>
     </repository>
     <snapshotRepository>
       <id>pimco-snapshot</id>
-      <url>http://prodart:1977/artifactory/libs-snapshot-local</url>
+      <url>${snapshot.url}</url>
     </snapshotRepository>
-    <site>
-      <id>javadoc-site</id>
-      <name>Popcorn Site</name>
-      <url>file:///appl/javadocs/popcorn/1.13.1-SNAPSHOT/demo-schema/popcorn-avro-schema-parent/demo-schema</url>
-    </site>
   </distributionManagement>
     <licenses>
         <license>
