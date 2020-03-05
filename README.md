@@ -206,28 +206,29 @@ public static void main(String[] args) {
 | **HS**           | _Has (aka `IS NOT NULL`)_ | `has(Car.DESCRIPTION)` / `not(has(Car.DESCRIPTION))` |
 | **SQ**           | _Standing Query_ | _Can the index accelerate a query (as opposed to an attribute) to provide constant time complexity for any simple query, complex query, or fragment_ |
 | **QZ**           | _Quantization_ | _Does the index accept a quantizer to control granularity_ |
+| **LP**           | _LongestPrefix_ | `longestPrefix(Car.NAME, "Ford")` |
 
 Note: CQEngine also supports complex queries via **`and`**, **`or`**, **`not`**, and combinations thereof, across all indexes.
 
 **Index Feature Matrix**
 
-| <sub>**Index Type**</sub> | <sub>**EQ**</sub> | <sub>**IN**</sub> | <sub>**LT**</sub> | <sub>**GT**</sub> | <sub>**BT**</sub> | <sub>**SW**</sub> | <sub>**EW**</sub> | <sub>**SC**</sub> | <sub>**CI**</sub> | <sub>**HS**</sub> | <sub>**RX**</sub> | <sub>**SQ**</sub> | <sub>**QZ**</sub> |
-|:---------------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|
-| [<sub>Hash</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/hash/HashIndex.html) | ✓      | ✓      |        |        |        |        |        |        |        |        |        |        | ✓      |
-| [<sub>Unique</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/unique/UniqueIndex.html) | ✓      | ✓      |        |        |        |        |        |        |        |        |        |        |        |
-| [<sub>Compound</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/compound/CompoundIndex.html) | ✓      | ✓      |        |        |        |        |        |        |        |        |        |        | ✓      |
-| [<sub>Navigable</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/navigable/NavigableIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        |        |        | ✓      |
-| [<sub>PartialNavigable</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/navigable/PartialNavigableIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        |        | ✓      |        |
-| [<sub>RadixTree</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/radix/RadixTreeIndex.html) | ✓      | ✓      |        |        |        | ✓      |        |        |        |        |        |        |        |
-| [<sub>ReversedRadixTree</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/radixreversed/ReversedRadixTreeIndex.html) | ✓      | ✓      |        |        |        |        | ✓      |        |        |        |        |        |        |
-| [<sub>InvertedRadixTree</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/radixinverted/InvertedRadixTreeIndex.html) | ✓      | ✓      |        |        |        |        |        |        | ✓      |        |        |        |        |
-| [<sub>SuffixTree</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/suffix/SuffixTreeIndex.html) | ✓      | ✓      |        |        |        |        | ✓      | ✓      |        |        |        |        |        |
-| [<sub>StandingQuery</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/standingquery/StandingQueryIndex.html) |        |        |        |        |        |        |        |        |        |        |        | ✓      |        |
-| [<sub>Fallback</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/fallback/FallbackIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |
-| [<sub>OffHeap</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/offheap/OffHeapIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        | ✓<sup>[1]</sup>      |        |
-| [<sub>PartialOffHeap</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/offheap/PartialOffHeapIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        | ✓      |        |
-| [<sub>Disk</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/disk/DiskIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        | ✓<sup>[1]</sup>      |        |
-| [<sub>PartialDisk</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/disk/PartialDiskIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        | ✓      |        |
+| <sub>**Index Type**</sub> | <sub>**EQ**</sub> | <sub>**IN**</sub> | <sub>**LT**</sub> | <sub>**GT**</sub> | <sub>**BT**</sub> | <sub>**SW**</sub> | <sub>**EW**</sub> | <sub>**SC**</sub> | <sub>**CI**</sub> | <sub>**HS**</sub> | <sub>**RX**</sub> | <sub>**SQ**</sub> | <sub>**QZ**</sub> | <sub>**LP**</sub> |
+|:---------------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|:-------|
+| [<sub>Hash</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/hash/HashIndex.html) | ✓      | ✓      |        |        |        |        |        |        |        |        |        |        | ✓      |        |
+| [<sub>Unique</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/unique/UniqueIndex.html) | ✓      | ✓      |        |        |        |        |        |        |        |        |        |        |        |        |
+| [<sub>Compound</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/compound/CompoundIndex.html) | ✓      | ✓      |        |        |        |        |        |        |        |        |        |        | ✓      |        |
+| [<sub>Navigable</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/navigable/NavigableIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        |        |        | ✓      |        |
+| [<sub>PartialNavigable</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/navigable/PartialNavigableIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        |        | ✓      |        |        |
+| [<sub>RadixTree</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/radix/RadixTreeIndex.html) | ✓      | ✓      |        |        |        | ✓      |        |        |        |        |        |        |        |        |
+| [<sub>ReversedRadixTree</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/radixreversed/ReversedRadixTreeIndex.html) | ✓      | ✓      |        |        |        |        | ✓      |        |        |        |        |        |        |        |
+| [<sub>InvertedRadixTree</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/radixinverted/InvertedRadixTreeIndex.html) | ✓      | ✓      |        |        |        |        |        |        | ✓      |        |        |        |        | ✓      |
+| [<sub>SuffixTree</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/suffix/SuffixTreeIndex.html) | ✓      | ✓      |        |        |        |        | ✓      | ✓      |        |        |        |        |        |        |
+| [<sub>StandingQuery</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/standingquery/StandingQueryIndex.html) |        |        |        |        |        |        |        |        |        |        |        | ✓      |        |        |
+| [<sub>Fallback</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/fallback/FallbackIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        | ✓      |
+| [<sub>OffHeap</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/offheap/OffHeapIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        | ✓<sup>[1]</sup>      |        |        |
+| [<sub>PartialOffHeap</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/offheap/PartialOffHeapIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        | ✓      |        |        |
+| [<sub>Disk</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/disk/DiskIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        | ✓<sup>[1]</sup>      |        |        |
+| [<sub>PartialDisk</sub>](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/index/disk/PartialDiskIndex.html) | ✓      | ✓      | ✓      | ✓      | ✓      | ✓      |        |        |        |        |        | ✓      |        |        |
 <sup>[1]</sup> See: [forStandingQuery()](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/com/googlecode/cqengine/query/QueryFactory.html#forStandingQuery-com.googlecode.cqengine.query.Query-)
 
 The [Benchmark](documentation/Benchmark.md) page contains examples of how to add these indexes to a collection, and measures their impact on latency.
@@ -360,6 +361,8 @@ Store the collection in native memory, within the JVM process but outside the Ja
 IndexedCollection<Car> cars = new ConcurrentIndexedCollection<Car>(OffHeapPersistence.onPrimaryKey(Car.CAR_ID));
 ```
 
+Note that the off-heap persistence will automatically create an index on the specified primary key attribute, so there is no need to add an index on that attribute later.
+
 **Disk**
 
 Store the collection in a temp file on disk (then see `DiskPersistence.getFile()`):
@@ -370,6 +373,8 @@ Or, store the collection in a particular file on disk:
 ```java
 IndexedCollection<Car> cars = new ConcurrentIndexedCollection<Car>(DiskPersistence.onPrimaryKeyInFile(Car.CAR_ID, new File("cars.dat")));
 ```
+
+Note that the disk persistence will automatically create an index on the specified primary key attribute, so there is no need to add an index on that attribute later.
 
 **Wrapping**
 
@@ -523,7 +528,7 @@ CQEngine has been designed with support for grouping and aggregation in mind, bu
 
 CQEngine `ResultSet` can be converted into a Java 8 `Stream` by calling `ResultSet.stream()`.
 
-Note that Streams are **evaluated via filtering** and they do not avail of CQEngine indexes. So **for best performance, as much of the overall query as possible should be encapsulated in the CQEngine query**, as opposed to in lamba expressions in the stream. This combination would dramatically outperform a stream and lambda expression alone, which simply filtered the collection.
+Note that Streams are **evaluated via filtering** and they do not avail of CQEngine indexes. So **for best performance, as much of the overall query as possible should be encapsulated in the CQEngine query**, as opposed to in lambda expressions in the stream. This combination would dramatically outperform a stream and lambda expression alone, which simply filtered the collection.
 
 Here's how to transform a `ResultSet` into a `Stream`, to compute the distinct set of Colors of cars which match a CQEngine query.
 ```java
@@ -589,7 +594,7 @@ CQEngine should generally be compatible with other JVM languages besides Java to
 
 ## Project Status ##
 
-  * CQEngine 3.0.0 is the current release as of writing (September 2018), and is in Maven central
+  * CQEngine 3.4.0 is the current release as of writing (June 2019), and is in Maven central
   * A [ReleaseNotes](documentation/ReleaseNotes.md) page has been added to document changes between releases
   * API / JavaDocs are available [here](http://htmlpreview.github.io/?http://raw.githubusercontent.com/npgall/cqengine/master/documentation/javadoc/apidocs/index.html)
 
